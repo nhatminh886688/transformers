@@ -73,9 +73,7 @@ def glue_convert_examples_to_features(examples, tokenizer,
             logger.info("Using output mode %s for task %s" % (output_mode, task))
 
     label_map = {label: i for i, label in enumerate(label_list)}
-    logger.info("*********************************")
-    logger.info(label_map)
-    logger.info("*********************************")
+    
 
     features = []
     for (ex_index, example) in enumerate(examples):
@@ -113,6 +111,9 @@ def glue_convert_examples_to_features(examples, tokenizer,
         assert len(token_type_ids) == max_length, "Error with input length {} vs {}".format(len(token_type_ids), max_length)
 
         if output_mode == "classification":
+            logger.info("*********************************")
+            logger.info(label_map)
+            logger.info("*********************************")            
             label = label_map[example.label]
         elif output_mode == "regression":
             label = float(example.label)
